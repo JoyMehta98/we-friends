@@ -7,7 +7,7 @@ const router = Router();
 router
   .route("/")
   .post(authMiddleware, postController.createPost)
-  .get(postController.getPosts);
+  .get(authMiddleware, postController.getPosts);
 
 router
   .route("/:postId")

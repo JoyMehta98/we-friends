@@ -1,13 +1,13 @@
 import { ObjectId } from "mongoose";
 
-export interface IPost {
-  context: string;
+export interface ILike {
   user: ObjectId;
-  image: string;
+  post: ObjectId;
+  comment: ObjectId;
   _id: ObjectId;
 }
 
-export interface PostFilterPayload {
+export interface CommentFilterPayload {
   skip: number;
   limit: number;
   search?: string;

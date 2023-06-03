@@ -72,7 +72,7 @@ export const deleteUser = async (
     const { userId } = req.params;
     await userService.deleteUserById(userId);
 
-    res.status(httpStatus.NO_CONTENT).send({ isSuccess: true });
+    return res.status(httpStatus.NO_CONTENT).send({ isSuccess: true });
   } catch (err) {
     next(err);
   }

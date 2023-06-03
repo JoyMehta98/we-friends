@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import { IUser } from "./user.interfaces";
-import { Roles } from "constants/enum";
 
 const userSchema = new mongoose.Schema<IUser>(
   {
@@ -31,11 +30,6 @@ const userSchema = new mongoose.Schema<IUser>(
     coverImage: {
       type: String,
     },
-    role: {
-      type: Number,
-      enum: Roles,
-      default: Roles.User,
-    },
   },
   {
     timestamps: true,
@@ -44,14 +38,6 @@ const userSchema = new mongoose.Schema<IUser>(
 
 userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ contactNo: 1 }, { unique: true });
-
-userSchema.method(
-  "isPasswordMatch",
-  async function (password: string): Promise<boolean> {
-    const user = this;
-    return bcrypt.compare(password, user.password);
-  }
-);
 
 userSchema.pre("save", async function (next) {
   const user = this;

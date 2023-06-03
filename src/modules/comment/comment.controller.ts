@@ -1,28 +1,28 @@
 import httpStatus from "http-status";
 import { Request, Response, NextFunction } from "express";
-import * as postService from "./post.service";
+import * as commentService from "./comment.service";
 
-export const createPost = async (
+export const createComment = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const data = await postService.createPost(req.body);
+    const data = await commentService.createComment(req.body);
     return res.status(httpStatus.CREATED).send({ iSuccess: true, data });
   } catch (err) {
     next(err);
   }
 };
 
-export const getPosts = async (
+export const getComments = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const { skip, limit, search, userId } = req.query;
-    const data = await postService.getFilteredPosts({
+    const data = await commentService.getFilteredComments({
       skip: +`${skip}`,
       limit: +`${limit}`,
       search: `${search}`,
@@ -34,14 +34,14 @@ export const getPosts = async (
   }
 };
 
-export const getPost = async (
+export const getComment = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { postId } = req.params;
-    const data = await postService.getPostById(postId);
+    const { commentId } = req.params;
+    const data = await commentService.getCommentById(commentId);
 
     return res.send({ isSuccess: true, data });
   } catch (err) {
@@ -49,14 +49,14 @@ export const getPost = async (
   }
 };
 
-export const updatePost = async (
+export const updateComment = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { postId } = req.params;
-    const data = await postService.updatePostById(postId, req.body);
+    const { commentId } = req.params;
+    const data = await commentService.updateCommentById(commentId, req.body);
 
     return res.send({ isSuccess: true, data });
   } catch (err) {
@@ -64,14 +64,14 @@ export const updatePost = async (
   }
 };
 
-export const deletePost = async (
+export const deleteComment = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { postId } = req.params;
-    await postService.deletePostById(postId);
+    const { commentId } = req.params;
+    await commentService.deleteCommentById(commentId);
 
     return res.status(httpStatus.NO_CONTENT).send({ isSuccess: true });
   } catch (err) {

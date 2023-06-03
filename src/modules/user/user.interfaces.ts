@@ -1,5 +1,4 @@
 import { ObjectId } from "mongoose";
-import { Roles } from "constants/enum";
 
 export interface IUser {
   name: string;
@@ -8,7 +7,6 @@ export interface IUser {
   password: string;
   coverImage: string;
   profileImage: string;
-  role: Roles;
   _id: ObjectId;
 }
 

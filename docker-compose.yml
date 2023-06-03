@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  backend:
+    build: .
+    command: ["yarn", "run", "start"]
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_HOST=host.docker.internal
+      - MONGO_PORT=27017
+    env_file:
+      - .env

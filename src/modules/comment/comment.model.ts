@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { IPost } from "./post.interfaces";
+import { IComment } from "./comment.interfaces";
 
-const postSchema = new mongoose.Schema<IPost>(
+const commentSchema = new mongoose.Schema<IComment>(
   {
     context: {
       type: String,
@@ -13,6 +13,11 @@ const postSchema = new mongoose.Schema<IPost>(
       required: true,
       ref: "User",
     },
+    post: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "Post",
+    },
     image: {
       type: String,
     },
@@ -22,6 +27,6 @@ const postSchema = new mongoose.Schema<IPost>(
   }
 );
 
-const Post = mongoose.model<IPost>("Post", postSchema);
+const Comment = mongoose.model<IComment>("Comment", commentSchema);
 
-export default Post;
+export default Comment;
